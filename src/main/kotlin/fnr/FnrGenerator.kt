@@ -141,14 +141,17 @@ class FnrGenerator {
         }
 
         private fun getFodselsarForelder(forelderTil: String?): Int =
-            forelderTil?.substring(4, 6)?.toIntOrNull()?.let { aarTall ->
-                iar.toIntOrNull()?.let { iarInt ->
-                    if (aarTall >= iarInt) (aarTall - 40..aarTall - 20).random() else 0
+            forelderTil
+                ?.substring(4, 6)
+                ?.toIntOrNull()
+                ?.let { barnetsAar ->
+                    val iarInt = iar.toInt()
+                    val barnetsFulleAar = if (barnetsAar <= iarInt) 2000 + barnetsAar else 1900 + barnetsAar
+                    (barnetsFulleAar - 40..barnetsFulleAar - 18).random() % 100
                 }
-            } ?: 0
+                ?: 0
 
-        private fun getKontrollsiffer(fnr: String,
-                                      tallrekke: List<Int>): Int? {
+        private fun getKontrollsiffer(fnr: String, tallrekke: List<Int>): Int? {
             val sum = fnr.mapIndexed { i, char ->
                 char.digitToInt() * tallrekke[i]
             }.sum()
