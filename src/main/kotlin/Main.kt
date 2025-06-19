@@ -6,39 +6,67 @@ import org.guerillaqc.fnr.utils.Enums
 import org.guerillaqc.fnr.utils.FnrUtils
 
 fun main() {
-    var fnr                 = FnrGenerator.getRandomPersonFnr()
-    var fdato               = FnrGenerator.getRandomPersonFdato()
+    /* Generer tilfeldig fødselsnummer og fødselsdato: */
+    var tilfFnr                 = FnrGenerator.getRandomPersonFnr()
+    var tilfFdato               = FnrGenerator.getRandomPersonFdato()
 
-    var fnrKjonnM           = FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.MANN)
-    var fnrKjonnK           = FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.KVINNE)
+    /* Generer tilfeldig fødselsnummer med spesifikt kjønn: */
+    var tilfFnrKjonnM           = FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.MANN)
+    var tilfFnrKjonnK           = FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.KVINNE)
 
-    var fnrForelderTil      = FnrGenerator.getRandomFnrForelderTilFnr("10057434940")
-    var fdatoForelderTil    = FnrGenerator.getRandomFdatoForelderTilFnr("10057434940")
+    /* Generer tilfeldig fødselsnummer og fødselsdato for person som kan være forelder til angitt fødselsnummer: */
+    var tilfFnrForelderTil      = FnrGenerator.getRandomFnrForelderTilFnr("10057434940")
+    var tilfFdatoForelderTil    = FnrGenerator.getRandomFdatoForelderTilFnr("10057434940")
 
-    var fnrMillenial        = FnrGenerator.getRandomFnrMillenial()
-    var fdatoMillenial      = FnrGenerator.getRandomFdatoMillenial()
+    /* Generer tilfeldig fødselsnummer og fødselsdato for person som er født etter år 2000: */
+    var tilfFnrMillenial        = FnrGenerator.getRandomFnrMillenial()
+    var tilfFdatoMillenial      = FnrGenerator.getRandomFdatoMillenial()
 
-    var fnrBarn             = FnrGenerator.getRandomFnrBarn()
-    var fdatoBarn           = FnrGenerator.getRandomFdatoBarn()
+    /* Generer tilfeldig fødselsnummer og fødselsdato for barn: */
+    var tilfFnrBarn             = FnrGenerator.getRandomFnrBarn()
+    var tilfFdatoBarn           = FnrGenerator.getRandomFdatoBarn()
 
-    var fnrBarnehage        = FnrGenerator.getRandomFnrBarnehage()
-    var fdatoBarnehage      = FnrGenerator.getRandomFdatoBarnehage()
+    /* Generer tilfeldig fødselsnummer og fødselsdato for barn som går i barnehage (riktig alder): */
+    var tilfFnrBarnehage        = FnrGenerator.getRandomFnrBarnehage()
+    var tilfFdatoBarnehage      = FnrGenerator.getRandomFdatoBarnehage()
 
-    var fnrBarnSFO          = FnrGenerator.getRandomFnrSFO()
-    var fdatoBarnSFO        = FnrGenerator.getRandomFdatoSFO()
+    /* Generer tilfeldig fødselsnummer og fødselsdato for barn som går på SFO (riktig alder): */
+    var tilfFnrBarnSFO          = FnrGenerator.getRandomFnrSFO()
+    var tilfFdatoBarnSFO        = FnrGenerator.getRandomFdatoSFO()
 
-    var fnrForAlder1        = FnrGenerator.getRandomFnrAlder(20)
-    var fnrForAlder2        = FnrGenerator.getRandomFnrAlder(30)
+    /* Generer tilfeldig fødselsnummer og fødselsdato for person med spesifikk alder: */
+    var tilfFnrForAlder1        = FnrGenerator.getRandomFnrAlder(20)
+    var tilfFnrForAlder2        = FnrGenerator.getRandomFnrAlder(30)
+    var tilfFdatoForAlder1      = FnrGenerator.getRandomFdatoAlder(20)
+    var tilfFdatoForAlder2      = FnrGenerator.getRandomFdatoAlder(30)
 
-    var fdatoForAlder1      = FnrGenerator.getRandomFdatoAlder(20)
-    var fdatoForAlder2      = FnrGenerator.getRandomFdatoAlder(30)
+    /* Finn kjønn ut fra fødselsnummer: */
+    var kjonnFnrK               =  FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.KVINNE)
+    var kjonnK                  =  FnrUtils.getKjonnFraFnr(kjonnFnrK)
+    var kjonnFnrM               =  FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.MANN)
+    var kjonnM                  =  FnrUtils.getKjonnFraFnr(kjonnFnrM)
 
-    var kjonnFraFnr                 = FnrUtils.getKjonnFraFnr(FnrGenerator.getRandomPersonFnr())
-    var fdatoFraFnr                 = FnrUtils.getFodselsdatoFraFnr(FnrGenerator.getRandomPersonFnr())
-    var fnrFormattert               = FnrUtils.getFnrFormatert(FnrGenerator.getRandomPersonFnr())
-    var alderFraFdatoDatostreng     = FnrUtils.getAlderFraFdato(FnrGenerator.getRandomPersonFdato())
-    var akderFraFdatoDato           = FnrUtils.getAlderFraFdato(10, 5, 1974)
-    var alderFraFnr                 = FnrUtils.getAlderFraFnr(FnrGenerator.getRandomPersonFnr())
+    /* Finn fødselsdato ut fra fødselsnummer: */
+    var fdatoFraFnr             = FnrUtils.getFodselsdatoFraFnr(FnrGenerator.getRandomPersonFnr())
+
+    /* Finn alder ut fra fødselsdato: */
+    val fdato                   = FnrGenerator.getRandomPersonFdato()
+    var alderFraFdato           = FnrUtils.getAlderFraFdato(fdato)
+
+    /* Finn alder ut fra fødselsnummer: */
+    var alderFraFnr             = FnrUtils.getAlderFraFnr("10057434940")
+
+    /* Finn alder ut fra fødselsdato - dag, mnd og år: */
+    var alderFraFdatoDagMndAr   = FnrUtils.getAlderFraFdato(10, 5, 1974)
+
+    /* Formatter fødselsnummer (skille mellom datodel og fnrdel): */
+    var fnrFormattertDefault   = FnrUtils.getFnrFormatert(FnrGenerator.getRandomPersonFnr())
+    var fnrFormattertAnnet     = FnrUtils.getFnrFormatert(FnrGenerator.getRandomPersonFnr(), "-")
+
+    /* Formatter fødselsdato: */
+    val fdatoTilFormattering    = FnrGenerator.getRandomPersonFdato()
+    val formattertFodselsdatoD  = FnrUtils.getFdatoFormatert(fdatoTilFormattering)
+    val formattertFodselsdato   = FnrUtils.getFdatoFormatert(fdatoTilFormattering, "-")
 
     print("")
 }
