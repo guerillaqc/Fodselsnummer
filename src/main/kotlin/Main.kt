@@ -1,6 +1,5 @@
 package org.guerillaqc
 
-
 import org.guerillaqc.fnr.FnrGenerator
 import org.guerillaqc.fnr.utils.Enums
 import org.guerillaqc.fnr.utils.FnrUtils
