@@ -10,41 +10,50 @@ class FnrGenerator {
     companion object {
         private val iar: String = Integer.parseInt(DateTimeFormatter.ofPattern("yy").format(LocalDateTime.now())).toString()
 
-        fun getRandomPersonFnr(): String = getRandomFnr()
+        fun tilfeldigFodselsnummer(): String = getRandomFnr()
 
-        fun getRandomPersonFdato(): String = getRandomFdato()
+        fun tilfeldigFodselsdato(): String = getRandomFdato()
 
-        fun getRandomPersonFnrKjonn(kjonn: Enums.Kjonn): String = getRandomFnr(kjonn = kjonn)
+        fun tilfeldigFodselsnummerKvinne() : String = tilfeldigFodselsnummerKjonn(Enums.Kjonn.KVINNE)
 
-        fun getRandomFnrBarn(): String = getRandomFnr(barn = true)
+        fun tilfeldigFodselsnummerMann() : String = tilfeldigFodselsnummerKjonn(Enums.Kjonn.KVINNE)
 
-        fun getRandomFdatoBarn(): String = getRandomFdato(barn = true)
+        fun tilfeldigFodselsnummerKjonn(kjonn: Enums.Kjonn): String = getRandomFnr(kjonn = kjonn)
 
-        fun getRandomFnrBarnehage(): String = getRandomFnr(barn = true, barnehage = true, sfo = false)
+        fun tilfeldigFodselsnummerBarn(): String = getRandomFnr(barn = true)
 
-        fun getRandomFdatoBarnehage(): String = getRandomFdato(barn = true, barnehage = true, sfo = false)
+        fun tilfeldigFodselsdatoBarn(): String = getRandomFdato(barn = true)
 
-        fun getRandomFnrSFO(): String = getRandomFnr(barn = true, sfo = true)
+        fun tilfeldigFodselsnummerVoksen(): String = getRandomFnr(voksen = true)
 
-        fun getRandomFdatoSFO(): String = getRandomFdato(barn = true, sfo = true)
+        fun tilfeldigFodselsdatoVoksen(): String = getRandomFdato(voksen = true)
 
-        fun getRandomFnrMillenial(): String = getRandomFnr(millenial = true)
+        fun tilfeldigFodselsnummerBarnehage(): String = getRandomFnr(barn = true, barnehage = true, sfo = false)
 
-        fun getRandomFdatoMillenial(): String = getRandomFdato(millenial = true)
+        fun tilfeldigFodselsdatoBarnehage(): String = getRandomFdato(barn = true, barnehage = true, sfo = false)
 
-        fun getRandomFnrForelderTilFnr(fnr: String): String = getRandomFnr(forelderTil = fnr)
+        fun tilfeldigFodselsnummerSFO(): String = getRandomFnr(barn = true, sfo = true)
 
-        fun getRandomFdatoForelderTilFnr(fnr: String): String = getRandomFdato(forelderTil = fnr)
+        fun tilfeldigFodselsdatoSFO(): String = getRandomFdato(barn = true, sfo = true)
 
-        fun getRandomFnrAlder(alder: Int): String = getRandomFnr(alder = alder, millenial = alder <= iar.toInt())
+        fun tilfeldigFodselsnummerMillenial(): String = getRandomFnr(millenial = true)
 
-        fun getRandomFdatoAlder(alder: Int): String = getRandomFdato(alder = alder, millenial = alder <= iar.toInt())
+        fun tilfeldigFodselsdatoMillenial(): String = getRandomFdato(millenial = true)
+
+        fun tilfeldigFodselsnummerForelder(fnr: String): String = getRandomFnr(forelderTil = fnr)
+
+        fun tilfeldigFodselsdatoForelder(fnr: String): String = getRandomFdato(forelderTil = fnr)
+
+        fun tilfeldigFodselsnummerAlder(alder: Int): String = getRandomFnr(alder = alder, millenial = alder <= iar.toInt())
+
+        fun tilfeldigFodselsdatoAlder(alder: Int): String = getRandomFdato(alder = alder, millenial = alder <= iar.toInt())
 
         private fun getRandomFnr(alder: Int? = null,
                                  kjonn: Enums.Kjonn = HelperUtils.getRandomEnum(Enums.Kjonn::class.java),
                                  forelderTil: String? = null,
                                  millenial: Boolean = false,
                                  barn: Boolean = false,
+                                 voksen: Boolean = false,
                                  barnehage: Boolean = false,
                                  sfo: Boolean = false): String {
             /* TIP
@@ -63,8 +72,8 @@ class FnrGenerator {
                 (forelderTil == null && !millenial && barn && barnehage && !sfo) ||
                 (forelderTil == null && !millenial && barn && !barnehage && sfo)) {
 
-                return createRandomFnr(alder = alder, forelderTil = forelderTil, kjonn = kjonn, millenial = millenial, barn = barn,
-                    barnehage = barnehage, sfo = sfo)
+                return createRandomFnr(alder = alder, forelderTil = forelderTil, kjonn = kjonn, millenial = millenial,
+                    barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo)
             } else {
                 throw Exception("Ugyldig kombinasjon av millenial, barn, barnehage og SFO!")
             }
@@ -75,24 +84,28 @@ class FnrGenerator {
                                    forelderTil: String? = null,
                                    millenial: Boolean = false,
                                    barn: Boolean = false,
+                                   voksen: Boolean = false,
                                    barnehage: Boolean = false,
                                    sfo: Boolean = false): String =
-            FnrUtils.getFodselsdatoFraFnr(getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil, millenial = millenial,
-                barn = barn, barnehage = barnehage, sfo = sfo))
+            FnrUtils.getFodselsdatoFraFnr(getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil,
+                millenial = millenial, barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo))
 
         private fun createRandomFnr(alder: Int? = null,
                                     forelderTil: String?,
                                     kjonn: Enums.Kjonn,
                                     millenial: Boolean,
                                     barn: Boolean,
+                                    voksen: Boolean,
                                     barnehage: Boolean,
                                     sfo: Boolean): String {
             while (true) {
                 val fdag = (1..28).random().toString().padStart(2, '0')
                 val fmaned = (1..12).random().toString().padStart(2, '0')
-                val far = getAr(alder, forelderTil, millenial, barn, barnehage, sfo)
+                val far = getAr(alder = alder, forelderTil = forelderTil, millenial = millenial, barn = barn,
+                    voksen = voksen, barnehage = barnehage, sfo = sfo)
                     .toString().padStart(2, '0')
 
+                // TODO: Mulig det må gjøres noe her ifm. voksen = true...
                 val milleniumtall = when {
                     millenial -> (6..9).random()
                     barn -> (5..9).random()
@@ -123,6 +136,7 @@ class FnrGenerator {
                           forelderTil: String?,
                           millenial: Boolean,
                           barn: Boolean,
+                          voksen: Boolean,
                           barnehage: Boolean,
                           sfo: Boolean): Int = when {
             alder != null -> if (millenial) {
@@ -137,6 +151,7 @@ class FnrGenerator {
                 sfo -> (iar.toInt() - 9..iar.toInt() - 6).random()
                 else -> iar.toInt() - (1..17).random()
             }
+            voksen -> (18..100).random()
             else -> (0..99).random()
         }
 

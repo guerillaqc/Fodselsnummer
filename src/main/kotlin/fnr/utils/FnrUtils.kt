@@ -22,9 +22,11 @@ class FnrUtils {
                 .let { it.substring(0, 2) + skilletegn + it.substring(2, 4) + skilletegn + it.substring(4, 8) }
         }
 
-        fun getAlderFraFnr(fnr: String): Int =
+        /*fun alderFraFodselsnummer(fnr: String): Int =
             getAlderFraFdato(getFodselsdatoFraFnr(fnr.requireValidFnr())) +
-                    if (fnr.substring(3, 6).toInt() > 24 && fnr.substring(6, 9).toInt() > 500) 100 else 0
+                    if (fnr.substring(3, 6).toInt() > 24 && fnr.substring(6, 9).toInt() > 500) 100 else 0*/
+        fun alderFraFodselsnummer(fnr: String): Int =
+            getAlderFraFdato(getFodselsdatoFraFnr(fnr.requireValidFnr()))
 
         fun getAlderFraFdato(fdatoEllerDag: Any, mnd: Int? = null, ar: Int? = null): Int = when {
             fdatoEllerDag is String && mnd == null && ar == null ->
