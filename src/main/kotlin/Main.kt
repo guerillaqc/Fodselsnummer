@@ -45,62 +45,66 @@ fun main() {
     val alderAvkom                      = FnrUtils.alderFraFodselsnummer(tilfeldigFnrAvkom)
     val tilfeldigFodselsnummerForelder  = FnrGenerator.tilfeldigFodselsnummerForelder(tilfeldigFnrAvkom)
     val alderForelder                   = FnrUtils.alderFraFodselsnummer(tilfeldigFodselsnummerForelder)
-    var tilfeldigFodselsdatoForelder    = FnrGenerator.tilfeldigFodselsdatoForelder("01060599633")
+    val tilfeldigFodselsdatoForelder    = FnrGenerator.tilfeldigFodselsdatoForelder("01060599633")
     //print("")
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for person som er født etter år 2000: */
-    var tilfeldigFodselsnummerMillenial = FnrGenerator.tilfeldigFodselsnummerMillenial()
-    var tilfeldigFodselsdatoMillenial   = FnrGenerator.tilfeldigFodselsdatoMillenial()
+    val tilfeldigFodselsnummerMillenial = FnrGenerator.tilfeldigFodselsnummerMillenial()
+    val tilfeldigFodselsdatoMillenial   = FnrGenerator.tilfeldigFodselsdatoMillenial()
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for voksen person: */
-    var tilfeldigFodselsnummerVoksen    = FnrGenerator.tilfeldigFodselsnummerVoksen()
-    var tilfeldigFodselsatoVoksen       = FnrGenerator.tilfeldigFodselsdatoVoksen()
+    val tilfeldigFodselsnummerVoksen    = FnrGenerator.tilfeldigFodselsnummerVoksen()
+    val tilfeldigFodselsatoVoksen       = FnrGenerator.tilfeldigFodselsdatoVoksen()
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for barn: */
-    var tilfeldigFodselsnummerBarn      = FnrGenerator.tilfeldigFodselsnummerBarn()
-    var tilfeldigFodselsdatoBarn        = FnrGenerator.tilfeldigFodselsdatoBarn()
+    val tilfeldigFodselsnummerBarn      = FnrGenerator.tilfeldigFodselsnummerBarn()
+    val tilfeldigFodselsdatoBarn        = FnrGenerator.tilfeldigFodselsdatoBarn()
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for barn som går i barnehage (riktig alder): */
-    var tilfFnrBarnehage                = FnrGenerator.tilfeldigFodselsnummerBarnehage()
-    var tilfFdatoBarnehage              = FnrGenerator.tilfeldigFodselsdatoBarnehage()
+    val tilfFnrBarnehage                = FnrGenerator.tilfeldigFodselsnummerBarnehage()
+    val tilfFdatoBarnehage              = FnrGenerator.tilfeldigFodselsdatoBarnehage()
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for barn som går på SFO (riktig alder): */
-    var tilfFnrBarnSFO                  = FnrGenerator.tilfeldigFodselsnummerSFO()
-    var tilfFdatoBarnSFO                = FnrGenerator.tilfeldigFodselsdatoSFO()
+    val tilfFnrBarnSFO                  = FnrGenerator.tilfeldigFodselsnummerSFO()
+    val tilfFdatoBarnSFO                = FnrGenerator.tilfeldigFodselsdatoSFO()
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for person med spesifikk alder: */
-    var tilfeldigFodselsnummerAlder1    = FnrGenerator.tilfeldigFodselsnummerAlder(20)
-    var tilfeldigFodselsnummerAlder2    = FnrGenerator.tilfeldigFodselsnummerAlder(30)
-    var tilfFodselsdatolder1            = FnrGenerator.tilfeldigFodselsdatoAlder(20)
-    var tilfFodselsdatolder2            = FnrGenerator.tilfeldigFodselsdatoAlder(30)
+    val tilfeldigFodselsnummerAlder1    = FnrGenerator.tilfeldigFodselsnummerAlder(20)
+    val tilfeldigFodselsnummerAlder2    = FnrGenerator.tilfeldigFodselsnummerAlder(30)
+    val tilfFodselsdatolder1            = FnrGenerator.tilfeldigFodselsdatoAlder(20)
+    val tilfFodselsdatolder2            = FnrGenerator.tilfeldigFodselsdatoAlder(30)
 
     /* Finn kjønn ut fra fødselsnummer: */
-    var fodselsnummerKvinne             =  FnrGenerator.tilfeldigFodselsnummerKvinne()
-    var kjonnFodselsnummerKvinne        =  FnrUtils.getKjonnFraFnr(fodselsnummerKvinne)
-    var fodselsnummerMann               =  FnrGenerator.tilfeldigFodselsnummerMann()
-    var kjonnFodselsnummerMann          =  FnrUtils.getKjonnFraFnr(fodselsnummerMann)
+    val tilfeldigFodselsnummerKvinne    =  FnrGenerator.tilfeldigFodselsnummerKvinne()
+    val kjonnFodselsnummerKvinne        =  FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerKvinne)
+    val tilfeldigFodselsnummerMann      =  FnrGenerator.tilfeldigFodselsnummerMann()
+    val kjonnFodselsnummerMann          =  FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerMann)
+    val tilfeldigFodselsnummerJente     = FnrGenerator.tilfeldigFodselsnummerJente()
+    val kjonnFodselsnummerJente         = FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerJente)
+    val tilfeldigFodselsnummerGutt      = FnrGenerator.tilfeldigFodselsnummerGutt()
+    val kjonnFodselsnummerGutt          = FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerMann)
 
     /* Finn fødselsdato ut fra fødselsnummer: */
-    var fdatoFraFnr             = FnrUtils.getFodselsdatoFraFnr(FnrGenerator.tilfeldigFodselsnummer())
+    val fdatoFraFnr             = FnrUtils.finnFodselsdatoFraFodselsnummer(FnrGenerator.tilfeldigFodselsnummer())
 
     /* Finn alder ut fra fødselsdato: */
     val fdato                   = FnrGenerator.tilfeldigFodselsdato()
-    var alderFraFdato           = FnrUtils.getAlderFraFdato(fdato)
+    val alderFraFdato           = FnrUtils.finnAlderFraFodselsdato(fdato)
 
     /* Finn alder ut fra fødselsnummer: */
-    var alderFraFnr             = FnrUtils.alderFraFodselsnummer("10057434940")
+    val alderFraFnr             = FnrUtils.alderFraFodselsnummer("10057434940")
 
     /* Finn alder ut fra fødselsdato - dag, mnd og år: */
-    var alderFraFdatoDagMndAr   = FnrUtils.getAlderFraFdato(10, 5, 1974)
+    val alderFraFdatoDagMndAr   = FnrUtils.finnAlderFraFodselsdato(10, 5, 1974)
 
     /* Formatter fødselsnummer (skille mellom datodel og fnrdel): */
-    var fnrFormattertDefault   = FnrUtils.getFnrFormatert(FnrGenerator.tilfeldigFodselsnummer())
-    var fnrFormattertAnnet     = FnrUtils.getFnrFormatert(FnrGenerator.tilfeldigFodselsnummer(), "-")
+    val fnrFormattertDefault   = FnrUtils.formaterFodselsnummer(FnrGenerator.tilfeldigFodselsnummer())
+    val fnrFormattertAnnet     = FnrUtils.formaterFodselsnummer(FnrGenerator.tilfeldigFodselsnummer(), "-")
 
     /* Formatter fødselsdato: */
     val fdatoTilFormattering    = FnrGenerator.tilfeldigFodselsdato()
-    val formattertFodselsdatoD  = FnrUtils.getFdatoFormatert(fdatoTilFormattering)
-    val formattertFodselsdato   = FnrUtils.getFdatoFormatert(fdatoTilFormattering, "-")
+    val formattertFodselsdatoD  = FnrUtils.formaterFodselsdato(fdatoTilFormattering)
+    val formattertFodselsdato   = FnrUtils.formaterFodselsdato(fdatoTilFormattering, "-")
 
     print("")
 }

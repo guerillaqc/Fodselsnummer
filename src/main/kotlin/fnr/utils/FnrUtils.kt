@@ -12,27 +12,23 @@ class FnrUtils {
         private val iar: String = Integer.parseInt(DateTimeFormatter.ofPattern("yy")
             .format(LocalDateTime.now())).toString()
 
-        fun getFnrFormatert(fnr: String, skilletegn: String = " "): String {
+        fun formaterFodselsnummer(fnr: String, skilletegn: String = " "): String {
             return fnr.requireValidFnr()
                 .let { it.substring(0, 6) + skilletegn + it.substring(6) }
         }
 
-        fun getFdatoFormatert(fdato: String, skilletegn: String = " "): String {
+        fun formaterFodselsdato(fdato: String, skilletegn: String = " "): String {
             return fdato.requireValidFdatoString()
                 .let { it.substring(0, 2) + skilletegn + it.substring(2, 4) + skilletegn + it.substring(4, 8) }
         }
 
-        /*fun alderFraFodselsnummer(fnr: String): Int =
-            getAlderFraFdato(getFodselsdatoFraFnr(fnr.requireValidFnr())) +
-                    if (fnr.substring(3, 6).toInt() > 24 && fnr.substring(6, 9).toInt() > 500) 100 else 0*/
-        fun alderFraFodselsnummer(fnr: String): Int =
-            getAlderFraFdato(getFodselsdatoFraFnr(fnr.requireValidFnr()))
+        fun alderFraFodselsnummer(fnr: String): Int = finnAlderFraFodselsdato(finnFodselsdatoFraFodselsnummer(fnr.requireValidFnr()))
 
-        fun getAlderFraFdato(fdatoEllerDag: Any, mnd: Int? = null, ar: Int? = null): Int = when {
+        fun finnAlderFraFodselsdato(fdatoEllerDag: Any, mnd: Int? = null, ar: Int? = null): Int = when {
             fdatoEllerDag is String && mnd == null && ar == null ->
                 fdatoEllerDag.requireValidFdatoString()
                     .let { fdato ->
-                        getAlderFraFdato(
+                        finnAlderFraFodselsdato(
                             fdato.substring(0, 2).toInt(),
                             fdato.substring(2, 4).toInt(),
                             fdato.substring(4, 8).toInt()
@@ -53,11 +49,11 @@ class FnrUtils {
             else -> throw IllegalArgumentException("Ugyldig(e) argument(er).")
         }
 
-        fun getFodselsdatoFraFnr(fnr: String): String =
+        fun finnFodselsdatoFraFodselsnummer(fnr: String): String =
             fnr.requireValidFnr()
                 .let { "${it.substring(0, 4)}${if (it.substring(4, 6) >= iar) "19" else "20"}${it.substring(4, 6)}" }
 
-        fun getKjonnFraFnr(fnr: String): Enums.Kjonn =
+        fun finnKjonnFraFodselsnummer(fnr: String): Enums.Kjonn =
             fnr.requireValidFnr()
                 .let { if (it.substring(8, 9).toInt() % 2 == 0) Enums.Kjonn.KVINNE else Enums.Kjonn.MANN }
 

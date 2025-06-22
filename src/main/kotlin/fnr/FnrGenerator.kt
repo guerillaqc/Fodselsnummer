@@ -24,6 +24,10 @@ class FnrGenerator {
 
         fun tilfeldigFodselsdatoBarn(): String = getRandomFdato(barn = true)
 
+        fun tilfeldigFodselsnummerJente(): String = getRandomFdato(barn = true, kjonn = Enums.Kjonn.KVINNE)
+
+        fun tilfeldigFodselsnummerGutt(): String = getRandomFdato(barn = true, kjonn = Enums.Kjonn.MANN)
+
         fun tilfeldigFodselsnummerVoksen(): String = getRandomFnr(voksen = true)
 
         fun tilfeldigFodselsdatoVoksen(): String = getRandomFdato(voksen = true)
@@ -87,7 +91,7 @@ class FnrGenerator {
                                    voksen: Boolean = false,
                                    barnehage: Boolean = false,
                                    sfo: Boolean = false): String =
-            FnrUtils.getFodselsdatoFraFnr(getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil,
+            FnrUtils.finnFodselsdatoFraFodselsnummer(getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil,
                 millenial = millenial, barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo))
 
         private fun createRandomFnr(alder: Int? = null,
