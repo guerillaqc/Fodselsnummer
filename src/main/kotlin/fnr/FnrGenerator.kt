@@ -5,18 +5,19 @@ import org.guerillaqc.fnr.utils.FnrUtils
 import org.guerillaqc.fnr.utils.HelperUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlin.random.Random
 
 class FnrGenerator {
     companion object {
-        private val iar: String = Integer.parseInt(DateTimeFormatter.ofPattern("yy").format(LocalDateTime.now())).toString()
+        private val iar: String = DateTimeFormatter.ofPattern("yy").format(LocalDateTime.now())
 
         fun tilfeldigFodselsnummer(): String = getRandomFnr()
 
         fun tilfeldigFodselsdato(): String = getRandomFdato()
 
-        fun tilfeldigFodselsnummerKvinne() : String = tilfeldigFodselsnummerKjonn(Enums.Kjonn.KVINNE)
+        fun tilfeldigFodselsnummerKvinne(): String = tilfeldigFodselsnummerKjonn(Enums.Kjonn.KVINNE)
 
-        fun tilfeldigFodselsnummerMann() : String = tilfeldigFodselsnummerKjonn(Enums.Kjonn.KVINNE)
+        fun tilfeldigFodselsnummerMann(): String = tilfeldigFodselsnummerKjonn(Enums.Kjonn.MANN)
 
         fun tilfeldigFodselsnummerKjonn(kjonn: Enums.Kjonn): String = getRandomFnr(kjonn = kjonn)
 
@@ -24,9 +25,9 @@ class FnrGenerator {
 
         fun tilfeldigFodselsdatoBarn(): String = getRandomFdato(barn = true)
 
-        fun tilfeldigFodselsnummerJente(): String = getRandomFdato(barn = true, kjonn = Enums.Kjonn.KVINNE)
+        fun tilfeldigFodselsnummerJente(): String = getRandomFnr(barn = true, kjonn = Enums.Kjonn.KVINNE)
 
-        fun tilfeldigFodselsnummerGutt(): String = getRandomFdato(barn = true, kjonn = Enums.Kjonn.MANN)
+        fun tilfeldigFodselsnummerGutt(): String = getRandomFnr(barn = true, kjonn = Enums.Kjonn.MANN)
 
         fun tilfeldigFodselsnummerVoksen(): String = getRandomFnr(voksen = true)
 
@@ -50,6 +51,11 @@ class FnrGenerator {
 
         fun tilfeldigFodselsnummerAlder(alder: Int): String = getRandomFnr(alder = alder, millenial = alder <= iar.toInt())
 
+        fun tilfeldigFodselsnummerAlderMellom(alderFra: Int, alderTil: Int): String {
+            return Random.nextInt(alderFra, alderTil + 1)
+                .let { alder -> getRandomFnr(alder = alder, millenial = alder <= iar.toInt()) }
+        }
+
         fun tilfeldigFodselsdatoAlder(alder: Int): String = getRandomFdato(alder = alder, millenial = alder <= iar.toInt())
 
         private fun getRandomFnr(alder: Int? = null,
@@ -59,82 +65,105 @@ class FnrGenerator {
                                  barn: Boolean = false,
                                  voksen: Boolean = false,
                                  barnehage: Boolean = false,
-                                 sfo: Boolean = false): String {
-            /* TIP
-               Gyldige kombinasjoner:
-               parentOf = null, millenial = true,  barn = false, barnehage = false, sfo = false
-               parentOf = null, millenial = false, barn = false, barnehage = false, sfo = false
-               parentOf = null, millenial = false, barn = true,  barnehage = false, sfo = false
-               parentOf = null, milennial = false, barn = true,  barnehage = true,  sfo = false
-               parentOf = null, millenial = false, barn = true,  barnehage = false, sfo = true
-               parentOf = """", millenial = false, barn = false, barnehage = galse, sfo = false */
-
-            if ((forelderTil != null && !millenial && !barn && !barnehage && !sfo) ||
-                (forelderTil == null && millenial && !barn && !barnehage && !sfo) ||
-                (forelderTil == null && !millenial && !barn && !barnehage && !sfo) ||
-                (forelderTil == null && !millenial && barn && !barnehage && !sfo) ||
-                (forelderTil == null && !millenial && barn && barnehage && !sfo) ||
-                (forelderTil == null && !millenial && barn && !barnehage && sfo)) {
-
-                return createRandomFnr(alder = alder, forelderTil = forelderTil, kjonn = kjonn, millenial = millenial,
-                    barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo)
-            } else {
-                throw Exception("Ugyldig kombinasjon av millenial, barn, barnehage og SFO!")
-            }
-        }
+                                 sfo: Boolean = false): String =
+            listOf(
+                forelderTil != null && !millenial && !barn && !barnehage && !sfo,
+                forelderTil == null && millenial && !barn && !barnehage && !sfo,
+                forelderTil == null && !millenial && !barn && !barnehage && !sfo,
+                forelderTil == null && !millenial && barn && !barnehage && !sfo,
+                forelderTil == null && !millenial && barn && barnehage && !sfo,
+                forelderTil == null && !millenial && barn && !barnehage && sfo
+            ).any { it }
+                .let { isValid ->
+                    if (isValid) {
+                        createRandomFnr(alder = alder, forelderTil = forelderTil, kjonn = kjonn, millenial = millenial,
+                            barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo)
+                    } else {
+                        throw Exception("Ugyldig kombinasjon av millenial, barn, barnehage og SFO!")
+                    }
+                }
 
         private fun getRandomFdato(alder: Int? = null,
-                                   kjonn: Enums.Kjonn = Enums.Kjonn.entries.toTypedArray().random(),
+                                   kjonn: Enums.Kjonn = Enums.Kjonn.entries.random(),
                                    forelderTil: String? = null,
                                    millenial: Boolean = false,
                                    barn: Boolean = false,
                                    voksen: Boolean = false,
                                    barnehage: Boolean = false,
                                    sfo: Boolean = false): String =
-            FnrUtils.finnFodselsdatoFraFodselsnummer(getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil,
-                millenial = millenial, barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo))
+            getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil,
+                millenial = millenial, barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo)
+                .let { FnrUtils.finnFodselsdatoFraFodselsnummer(it) }
 
-        private fun createRandomFnr(alder: Int? = null,
-                                    forelderTil: String?,
-                                    kjonn: Enums.Kjonn,
-                                    millenial: Boolean,
-                                    barn: Boolean,
-                                    voksen: Boolean,
-                                    barnehage: Boolean,
-                                    sfo: Boolean): String {
-            while (true) {
-                val fdag = (1..28).random().toString().padStart(2, '0')
-                val fmaned = (1..12).random().toString().padStart(2, '0')
-                val far = getAr(alder = alder, forelderTil = forelderTil, millenial = millenial, barn = barn,
-                    voksen = voksen, barnehage = barnehage, sfo = sfo)
-                    .toString().padStart(2, '0')
+        private fun isLeapYear(year: Int): Boolean =
+            year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)
 
-                // TODO: Mulig det må gjøres noe her ifm. voksen = true...
-                val milleniumtall = when {
-                    millenial -> (6..9).random()
-                    barn -> (5..9).random()
-                    else -> (1..5).random()
-                }
+        private fun getValidDayForMonth(month: Int, year: Int): Int =
+            when (month) {
+                1, 3, 5, 7, 8, 10, 12 -> 31
+                4, 6, 9, 11 -> 30
+                2 -> if (isLeapYear(year)) 29 else 28
+                else -> 28
+            }.let { daysInMonth -> (1..daysInMonth).random() }
 
-                val tilfeldigTall = (0..9).random()
+        private fun createRandomFnr(
+            alder: Int? = null,
+            forelderTil: String?,
+            kjonn: Enums.Kjonn,
+            millenial: Boolean,
+            barn: Boolean,
+            voksen: Boolean,
+            barnehage: Boolean,
+            sfo: Boolean
+        ): String =
+            generateSequence {
+                val fmaned = (1..12).random()
+                val far = getAr(
+                    alder = alder,
+                    forelderTil = forelderTil,
+                    millenial = millenial,
+                    barn = barn,
+                    voksen = voksen,
+                    barnehage = barnehage,
+                    sfo = sfo
+                )
+                val fullYear = if (far <= iar.toInt()) 2000 + far else 1900 + far
+                val fdag = getValidDayForMonth(fmaned, fullYear)
 
-                val kjonntall = when (kjonn) {
-                    Enums.Kjonn.MANN -> listOf(1, 3, 5, 7, 9).random()
-                    else -> listOf(0, 2, 4, 6, 8).random()
-                }
+                val farFormatted = far.toString().padStart(2, '0')
+                val fdagFormatted = fdag.toString().padStart(2, '0')
+                val fmanedFormatted = fmaned.toString().padStart(2, '0')
 
-                val baseNumber = "$fdag$fmaned$far$milleniumtall$tilfeldigTall$kjonntall"
+                var individnummer: Int
+                do {
+                    val milleniumtall = when {
+                        millenial -> (6..9).random()
+                        barn -> (5..9).random()
+                        else -> (1..5).random()
+                    }
 
-                val tallrekkeT = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)
-                val tallrekkeF = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
+                    val tilfeldigTall = (0..9).random()
+                    val kjonntall = when (kjonn) {
+                        Enums.Kjonn.MANN -> listOf(1, 3, 5, 7, 9).random()
+                        else -> listOf(0, 2, 4, 6, 8).random()
+                    }
 
-                val T = getKontrollsiffer(baseNumber, tallrekkeT) ?: continue
+                    individnummer = "$milleniumtall$tilfeldigTall$kjonntall".toInt()
+                } while (individnummer in 500..749) // Forkast ugyldige individnummer
 
-                val F = getKontrollsiffer("$baseNumber$T", tallrekkeF) ?: continue
-
-                return "$baseNumber$T$F"
+                "$fdagFormatted$fmanedFormatted$farFormatted${individnummer.toString().padStart(3, '0')}"
             }
-        }
+                .mapNotNull { baseNumber ->
+                    val tallrekkeT = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)
+                    val tallrekkeF = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
+
+                    getKontrollsiffer(baseNumber, tallrekkeT)?.let { T ->
+                        getKontrollsiffer("$baseNumber$T", tallrekkeF)?.let { F ->
+                            "$baseNumber$T$F"
+                        }
+                    }
+                }
+                .first()
 
         private fun getAr(alder: Int? = null,
                           forelderTil: String?,
@@ -143,10 +172,8 @@ class FnrGenerator {
                           voksen: Boolean,
                           barnehage: Boolean,
                           sfo: Boolean): Int = when {
-            alder != null -> if (millenial) {
-                iar.toInt() - alder
-            } else {
-                100 - (alder - 25)
+            alder != null -> LocalDateTime.now().year.let { currentYear ->
+                (currentYear - alder) % 100
             }
             forelderTil != null -> getFodselsarForelder(forelderTil)
             millenial -> (0..iar.toInt()).random()
@@ -155,7 +182,10 @@ class FnrGenerator {
                 sfo -> (iar.toInt() - 9..iar.toInt() - 6).random()
                 else -> iar.toInt() - (1..17).random()
             }
-            voksen -> (18..100).random()
+            voksen -> LocalDateTime.now().year.let { currentYear ->
+                val adultAge = (18..80).random()
+                (currentYear - adultAge) % 100
+            }
             else -> (0..99).random()
         }
 
@@ -170,17 +200,15 @@ class FnrGenerator {
                 }
                 ?: 0
 
-        private fun getKontrollsiffer(fnr: String, tallrekke: List<Int>): Int? {
-            val sum = fnr.mapIndexed { i, char ->
-                char.digitToInt() * tallrekke[i]
-            }.sum()
-
-            return when (val rest = sum % 11) {
-                0 -> 0
-                1 -> null
-                else -> 11 - rest
-            }
-        }
-
+        private fun getKontrollsiffer(fnr: String, tallrekke: List<Int>): Int? =
+            fnr.mapIndexed { i, char -> char.digitToInt() * tallrekke[i] }
+                .sum()
+                .let { sum ->
+                    when (val rest = sum % 11) {
+                        0 -> 0
+                        1 -> null
+                        else -> 11 - rest
+                    }
+                }
     }
 }
