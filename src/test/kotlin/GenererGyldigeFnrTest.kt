@@ -17,25 +17,25 @@ import org.guerillaqc.fnr.utils.FnrUtils
     28064557175
  */
 
-/*class GenererTilfeldigFnr : StringSpec({
+class GenererTilfeldigFnr : StringSpec({
 
-    "Generert tilfeldig fnr er gyldig." {
+    /*"Generert tilfeldig fnr er gyldig." {
         val randomfnr = FnrGenerator.getRandomPersonFnr()
         println(randomfnr)
 
         isValid(randomfnr) shouldBe true
-    }
+    }*/
 
-    "Generert tilfeldig fnr med spesifikt kjønn MANN er gyldig." {
+    /*"Generert tilfeldig fnr med spesifikt kjønn MANN er gyldig." {
         val randomfnrMann = FnrGenerator.getRandomPersonFnr()
         println(randomfnrMann)
 
         isValid(randomfnrMann) shouldBe true
-    }
+    }*/
 
     //isValid(FnrGenerator.getRandomPersonFnrKjonn(Enums.Kjonn.KVINNE)) shouldBe true
 
-    "Generert tilfelding fnr for person som kan være forelder er gyldig." {
+    /*"Generert tilfelding fnr for person som kan være forelder er gyldig." {
         val fnrAvkom        = "10057434940"
         val alderAvkom      = FnrUtils.getAlderFraFnr(fnrAvkom)
         val fnrForelder     = FnrGenerator.getRandomFnrForelderTilFnr(fnrAvkom)
@@ -60,10 +60,10 @@ import org.guerillaqc.fnr.utils.FnrUtils
 
         alderForelder shouldBeGreaterThan (alderAvkom + 16)
         //assertTrue(alderForelder > (alderAvkom + 16))
-    }
+    }*/
 
-    "Generert tilfeldig fødselsnummer og fødselsdato for person som er født etter år 2000 er gyldig."{
+    /*"Generert tilfeldig fødselsnummer og fødselsdato for person som er født etter år 2000 er gyldig."{
         isValid(FnrGenerator.getRandomFnrMillenial()) shouldBe true
-    }
+    }*/
 
-})*/
+})
