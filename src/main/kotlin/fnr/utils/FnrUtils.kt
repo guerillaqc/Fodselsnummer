@@ -20,13 +20,13 @@ class FnrUtils {
                 .let { it.substring(0, 2) + skilletegn + it.substring(2, 4) + skilletegn + it.substring(4, 8) }
 
         fun alderFraFodselsnummer(fnr: String): Int =
-            finnAlderFraFodselsdato(finnFodselsdatoFraFodselsnummer(fnr.requireValidFnr()))
+            alderFraFodselsdato(fodselsdatoFraFodselsnummer(fnr.requireValidFnr()))
 
-        fun finnAlderFraFodselsdato(fdatoEllerDag: Any, mnd: Int? = null, ar: Int? = null): Int = when {
+        fun alderFraFodselsdato(fdatoEllerDag: Any, mnd: Int? = null, ar: Int? = null): Int = when {
             fdatoEllerDag is String && mnd == null && ar == null ->
                 fdatoEllerDag.requireValidFdatoString()
                     .let { fdato ->
-                        finnAlderFraFodselsdato(
+                        alderFraFodselsdato(
                             fdato.substring(0, 2).toInt(),
                             fdato.substring(2, 4).toInt(),
                             fdato.substring(4, 8).toInt()
@@ -47,7 +47,7 @@ class FnrUtils {
             else -> throw IllegalArgumentException("Ugyldig(e) argument(er).")
         }
 
-        fun finnFodselsdatoFraFodselsnummer(fnr: String): String =
+        fun fodselsdatoFraFodselsnummer(fnr: String): String =
             fnr.requireValidFnr()
                 .let {
                     val yearPart = it.substring(4, 6).toInt()
@@ -56,7 +56,7 @@ class FnrUtils {
                     "${it.substring(0, 4)}$century${it.substring(4, 6)}"
                 }
 
-        fun finnKjonnFraFodselsnummer(fnr: String): Enums.Kjonn =
+        fun kjonnFraFodselsnummer(fnr: String): Enums.Kjonn =
             fnr.requireValidFnr()
                 .let { if (it.substring(8, 9).toInt() % 2 == 0) Enums.Kjonn.KVINNE else Enums.Kjonn.MANN }
     }

@@ -41,13 +41,13 @@ fun main() {
 
     /* Generer føselsnummer med spesifikt kjønn, og finn kjønn ut fra fødselsnummer: */
     val tilfeldigFodselsnummerKvinne    =  FnrGenerator.tilfeldigFodselsnummerKvinne()
-    val kjonnFodselsnummerKvinne        =  FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerKvinne)
+    val kjonnFodselsnummerKvinne        =  FnrUtils.kjonnFraFodselsnummer(tilfeldigFodselsnummerKvinne)
     val tilfeldigFodselsnummerMann      =  FnrGenerator.tilfeldigFodselsnummerMann()
-    val kjonnFodselsnummerMann          =  FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerMann)
+    val kjonnFodselsnummerMann          =  FnrUtils.kjonnFraFodselsnummer(tilfeldigFodselsnummerMann)
     val tilfeldigFodselsnummerJente     = FnrGenerator.tilfeldigFodselsnummerJente()
-    val kjonnFodselsnummerJente         = FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerJente)
+    val kjonnFodselsnummerJente         = FnrUtils.kjonnFraFodselsnummer(tilfeldigFodselsnummerJente)
     val tilfeldigFodselsnummerGutt      = FnrGenerator.tilfeldigFodselsnummerGutt()
-    val kjonnFodselsnummerGutt          = FnrUtils.finnKjonnFraFodselsnummer(tilfeldigFodselsnummerMann)
+    val kjonnFodselsnummerGutt          = FnrUtils.kjonnFraFodselsnummer(tilfeldigFodselsnummerMann)
 
     /* Generer tilfeldig fødselsnummer og fødselsdato for person som kan være forelder til angitt fødselsnummer: */
     val tilfeldigFnrAvkom               = "01060599633"
@@ -86,17 +86,17 @@ fun main() {
     val tilfeldigFodselsnummerAlderMellom   = FnrGenerator.tilfeldigFodselsnummerAlderMellom(20, 40)
 
     /* Finn fødselsdato ut fra fødselsnummer: */
-    val fodselsdatoFraFodselsnummer     = FnrUtils.finnFodselsdatoFraFodselsnummer(FnrGenerator.tilfeldigFodselsnummer())
+    val fodselsdatoFraFodselsnummer     = FnrUtils.fodselsdatoFraFodselsnummer(FnrGenerator.tilfeldigFodselsnummer())
 
     /* Finn alder ut fra fødselsdato: */
     val fdato                   = FnrGenerator.tilfeldigFodselsdato()
-    val alderFraFdato           = FnrUtils.finnAlderFraFodselsdato(fdato)
+    val alderFraFdato           = FnrUtils.alderFraFodselsdato(fdato)
 
     /* Finn alder ut fra fødselsnummer: */
     val alderFraFnr             = FnrUtils.alderFraFodselsnummer("10057434940")
 
     /* Finn alder ut fra fødselsdato - dag, mnd og år: */
-    val alderFraFdatoDagMndAr   = FnrUtils.finnAlderFraFodselsdato(10, 5, 1974)
+    val alderFraFdatoDagMndAr   = FnrUtils.alderFraFodselsdato(10, 5, 1974)
 
     /* Formatter fødselsnummer (skille mellom datodel og fnrdel): */
     val fnrFormattertDefault   = FnrUtils.formaterFodselsnummer(FnrGenerator.tilfeldigFodselsnummer())
