@@ -46,9 +46,9 @@
     <description>Genererer gyldige norske fødselsnumre</description>
     <url>https://github.com/guerillaqc/Fodselsnummer</url>
 
-    <groupId>org.guerillaqc</groupId>
+    <groupId>io.github.guerillaqc</groupId>
     <artifactId>fnr</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <properties>
