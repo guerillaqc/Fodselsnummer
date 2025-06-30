@@ -7,7 +7,6 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
 
-
 class FnrGenerator {
     companion object {
         private val iar: String = DateTimeFormatter.ofPattern("yy").format(LocalDateTime.now())
