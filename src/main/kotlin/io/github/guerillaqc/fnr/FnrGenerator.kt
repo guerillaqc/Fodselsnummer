@@ -1,8 +1,8 @@
-package org.guerillaqc.fnr
+package io.github.guerillaqc.fnr
 
-import org.guerillaqc.fnr.utils.Enums
-import org.guerillaqc.fnr.utils.FnrUtils
-import org.guerillaqc.fnr.utils.HelperUtils
+import io.github.guerillaqc.fnr.utils.Enums
+import io.github.guerillaqc.fnr.utils.FnrUtils
+import io.github.guerillaqc.fnr.utils.HelperUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random

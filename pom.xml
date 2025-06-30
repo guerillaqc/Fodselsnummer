@@ -6,7 +6,7 @@
 
     <groupId>io.github.guerillaqc</groupId>
     <artifactId>fnr</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>Fodselsnummergenerator</name>

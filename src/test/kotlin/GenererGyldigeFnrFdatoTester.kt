@@ -5,10 +5,10 @@ import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeLessThan
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
-import org.guerillaqc.fnr.FnrGenerator
-import org.guerillaqc.fnr.FnrValidator.erGyldig
-import org.guerillaqc.fnr.utils.Enums
-import org.guerillaqc.fnr.utils.FnrUtils
+import io.github.guerillaqc.fnr.FnrGenerator
+import io.github.guerillaqc.fnr.FnrValidator.erGyldig
+import io.github.guerillaqc.fnr.utils.Enums
+import io.github.guerillaqc.fnr.utils.FnrUtils
 
 /**
  * Det er litt problematisk å bruke egen validator til å teste genererte fnr, men siden det ikke finnes noe pålitelig

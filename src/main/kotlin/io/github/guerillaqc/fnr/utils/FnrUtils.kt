@@ -1,4 +1,4 @@
-package org.guerillaqc.fnr.utils
+package io.github.guerillaqc.fnr.utils
 
 import java.time.LocalDate
 import java.time.LocalDateTime

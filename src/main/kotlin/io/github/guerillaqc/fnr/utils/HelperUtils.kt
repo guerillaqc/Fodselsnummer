@@ -1,4 +1,4 @@
-package org.guerillaqc.fnr.utils
+package io.github.guerillaqc.fnr.utils
 
 fun String.requireValidFnr(): String = apply {
     require(length == 11 && all { it.isDigit() }) {

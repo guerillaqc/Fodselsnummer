@@ -1,8 +1,6 @@
-package org.guerillaqc.fnr
+package io.github.guerillaqc.fnr
 
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.ResolverStyle
 
 object FnrValidator {
     fun erGyldig(fnr: String): Boolean {

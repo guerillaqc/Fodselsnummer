@@ -1,8 +1,8 @@
-package org.guerillaqc
+package io.github.guerillaqc
 
-import org.guerillaqc.fnr.FnrGenerator
-import org.guerillaqc.fnr.utils.Enums
-import org.guerillaqc.fnr.utils.FnrUtils
+import io.github.guerillaqc.fnr.FnrGenerator
+import io.github.guerillaqc.fnr.utils.Enums
+import io.github.guerillaqc.fnr.utils.FnrUtils
 
 fun main() {
 
