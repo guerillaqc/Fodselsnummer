@@ -3,6 +3,7 @@ package io.github.guerillaqc.fnr
 import java.time.LocalDate
 
 object FnrValidator {
+
     fun erGyldig(fnr: String): Boolean {
         val renset = fnr.filter { it.isDigit() }
         if (renset.length != 11) return false
@@ -13,6 +14,12 @@ object FnrValidator {
         if (!gyldigeKontrollsifre(numre)) return false
 
         return true
+    }
+
+    fun erSyntetisk(fnr: String): Boolean {
+        if (fnr.length != 11) return false
+        val maned = fnr.substring(2, 4).toIntOrNull() ?: return false
+        return maned in 80..99
     }
 
     private fun gyldigDato(numre: List<Int>): Boolean {

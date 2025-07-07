@@ -33,7 +33,11 @@ fun main() {
           "Tilfeldig fødselsnummer for alder (30): ${FnrGenerator.tilfeldigFodselsnummerAlder(30)}\n" +
           "Tilfeldig fødselsdato for alder (20): ${FnrGenerator.tilfeldigFodselsdatoAlder(20)}\n" +
           "Tilfeldig fødselsdato for alder (30): ${FnrGenerator.tilfeldigFodselsdatoAlder(30)}\n" +
-          "Tilfeldig fødselsdato for alder mellom 20 og 40: ${FnrGenerator.tilfeldigFodselsnummerAlderMellom(20, 40)}\n")
+          "Tilfeldig fødselsdato for alder mellom 20 og 40: ${FnrGenerator.tilfeldigFodselsnummerAlderMellom(20, 40)}\n" +
+          "Tilfeldig syntetisk fødselsnummer: ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n" +
+          "Tilfeldig syntetisk fødselsdato: ${FnrGenerator.tilfeldigSyntetiskFodselsdato()}\n" +
+          "Tilfeldig : ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n")
+
 
     /* Generer tilfeldig fødselsnummer og fødselsdato: */
     val tileldigfFodselsnummenr         = FnrGenerator.tilfeldigFodselsnummer()
