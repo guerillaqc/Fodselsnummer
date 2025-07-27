@@ -36,8 +36,8 @@ fun main() {
           "Tilfeldig fødselsdato for alder (30): ${FnrGenerator.tilfeldigFodselsdatoAlder(30)}\n" +
           "Tilfeldig fødselsdato for alder mellom 20 og 40: ${FnrGenerator.tilfeldigFodselsnummerAlderMellom(20, 40)}\n" +
           "Tilfeldig syntetisk fødselsnummer: ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n" +
-          "Tilfeldig : ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n" +
-          "Tilfeldig syntetisk fødselnummerKjonn: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerKjonn(Enums.Kjonn.KVINNE)}\n" +
+          "Tilfeldig syntetisk fødselnummer kjonn kvinne: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerKjonn(Enums.Kjonn.KVINNE)}\n" +
+          "Tilfeldig syntetisk fødselnummer kjonn mann: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerKjonn(Enums.Kjonn.MANN)}\n" +
           "Tilfeldig syntetisk fødselsnummer alder (10): ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlder(10)}\n" +
           "Tilfeldig syntetisk fødselsnummer alder (20): ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlder(20)}\n" +
           "Tilfeldig syntetisk fødselsnummer alder (30): ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlder(30)}\n" +
