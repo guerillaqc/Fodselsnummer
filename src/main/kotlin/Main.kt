@@ -5,7 +5,6 @@ import io.github.guerillaqc.fnr.utils.Enums
 import io.github.guerillaqc.fnr.utils.FnrUtils
 
 fun main() {
-
     print("Tilfeldig fødselsnummer: ${FnrGenerator.tilfeldigFodselsnummer()}\n" +
           "Tilfeldig fødselsdato: ${FnrGenerator.tilfeldigFodselsdato()}\n" +
           "Tilfeldig fødselsnummer mann: ${FnrGenerator.tilfeldigFodselsnummerMann()} \n" +
@@ -15,7 +14,7 @@ fun main() {
           "Tilfeldig fødselsnummer med kjønn mann: ${FnrGenerator.tilfeldigFodselsnummerKjonn(Enums.Kjonn.MANN)}\n" +
           "Tilfeldig fødselsnummer med kjønn kvinne: ${FnrGenerator.tilfeldigFodselsnummerKjonn(Enums.Kjonn.KVINNE)}\n" +
           "Tilfeldig fødselsnummer forelder: ${FnrGenerator.tilfeldigFodselsnummerForelder("01060599633")} " +
-            "(alder avkom: ${FnrUtils.alderFraFodselsnummer("01060599633")})\n" +
+          "(alder avkom: ${FnrUtils.alderFraFodselsnummer("01060599633")})\n" +
           "Tilfeldig fødselsdato forelder: ${FnrGenerator.tilfeldigFodselsnummerForelder("01060599633")}\n" +
           "Tilfeldig fødselsnummer millenial: ${FnrGenerator.tilfeldigFodselsnummerMillenial()}\n" +
           "Tilfeldig fødselsndato millenial: ${FnrGenerator.tilfeldigFodselsdatoMillenial()}\n" +
@@ -29,14 +28,24 @@ fun main() {
           "Tilfeldig fødselsdato barnehage: ${FnrGenerator.tilfeldigFodselsdatoBarnehage()}\n" +
           "Tilfeldig fødselsnummer SFO: ${FnrGenerator.tilfeldigFodselsnummerSFO()}\n" +
           "Tilfeldig fødselsdato SFO: ${FnrGenerator.tilfeldigFodselsdatoSFO()}\n" +
+          "Tilfeldig fødselsnummer for alder (10): ${FnrGenerator.tilfeldigFodselsnummerAlder(10)}\n" +
           "Tilfeldig fødselsnummer for alder (20): ${FnrGenerator.tilfeldigFodselsnummerAlder(20)}\n" +
           "Tilfeldig fødselsnummer for alder (30): ${FnrGenerator.tilfeldigFodselsnummerAlder(30)}\n" +
+          "Tilfeldig fødselsdato for alder (10): ${FnrGenerator.tilfeldigFodselsdatoAlder(10)}\n" +
           "Tilfeldig fødselsdato for alder (20): ${FnrGenerator.tilfeldigFodselsdatoAlder(20)}\n" +
           "Tilfeldig fødselsdato for alder (30): ${FnrGenerator.tilfeldigFodselsdatoAlder(30)}\n" +
           "Tilfeldig fødselsdato for alder mellom 20 og 40: ${FnrGenerator.tilfeldigFodselsnummerAlderMellom(20, 40)}\n" +
           "Tilfeldig syntetisk fødselsnummer: ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n" +
-          "Tilfeldig syntetisk fødselsdato: ${FnrGenerator.tilfeldigSyntetiskFodselsdato()}\n" +
-          "Tilfeldig : ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n")
+          "Tilfeldig : ${FnrGenerator.tilfeldigSyntetiskFodselsnummer()}\n" +
+          "Tilfeldig syntetisk fødselnummerKjonn: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerKjonn(Enums.Kjonn.KVINNE)}\n" +
+          "Tilfeldig syntetisk fødselsnummer alder (10): ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlder(10)}\n" +
+          "Tilfeldig syntetisk fødselsnummer alder (20): ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlder(20)}\n" +
+          "Tilfeldig syntetisk fødselsnummer alder (30): ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlder(30)}\n" +
+          "Tilfeldig syntetisk fødselsnummer barn: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerBarn()}\n" +
+          "Tilfeldig syntetisk fødselsnummer voksen: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerVoksen()}\n" +
+          "Tilfeldig syntetisk fødselsnummer mann: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerMann()}\n" +
+          "Tilfeldig syntetisk fødselsnummer kvinne: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerKvinne()}\n" +
+          "Tilfeldig syntetisk fødselsnummer alder mellom 20 og 40: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlderMellom(20, 40)}\n")
 
 
     /* Generer tilfeldig fødselsnummer og fødselsdato: */
