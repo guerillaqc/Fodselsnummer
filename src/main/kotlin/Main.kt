@@ -5,7 +5,12 @@ import io.github.guerillaqc.fnr.utils.Enums
 import io.github.guerillaqc.fnr.utils.FnrUtils
 
 fun main() {
-    print("Tilfeldig fødselsnummer: ${FnrGenerator.tilfeldigFodselsnummer()}\n" +
+
+    val tilfeldigFodselsnummer          = FnrGenerator.tilfeldigFodselsnummer()
+    val tilfeldigSyntetiskFodselsnummer = FnrGenerator.tilfeldigSyntetiskFodselsnummer()
+
+    print("GENERERE FØDSELSNUMRE OG FØDSELSDATOER:\n" +
+          "Tilfeldig fødselsnummer: ${FnrGenerator.tilfeldigFodselsnummer()}\n" +
           "Tilfeldig fødselsdato: ${FnrGenerator.tilfeldigFodselsdato()}\n" +
           "Tilfeldig fødselsnummer mann: ${FnrGenerator.tilfeldigFodselsnummerMann()} \n" +
           "Tilfeldig fødselsdato for mann: ${FnrGenerator.tilfeldigFodselsnummerMann()}\n" +
@@ -45,7 +50,10 @@ fun main() {
           "Tilfeldig syntetisk fødselsnummer voksen: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerVoksen()}\n" +
           "Tilfeldig syntetisk fødselsnummer mann: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerMann()}\n" +
           "Tilfeldig syntetisk fødselsnummer kvinne: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerKvinne()}\n" +
-          "Tilfeldig syntetisk fødselsnummer alder mellom 20 og 40: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlderMellom(20, 40)}\n")
+          "Tilfeldig syntetisk fødselsnummer alder mellom 20 og 40: ${FnrGenerator.tilfeldigSyntetiskFodselsnummerAlderMellom(20, 40)}\n" +
+          "\nKONVERTERE FØDSELSNUMRE:\n" +
+          "Konverter reellt fødselsnummer $tilfeldigFodselsnummer til syntetisk fødselsnummer: ${FnrUtils.konverterTilSyntetiskFnr(tilfeldigFodselsnummer)}\n" +
+          "Konverter syntetisk fødselsnummer $tilfeldigSyntetiskFodselsnummer til reellt fødselsnummer: ${FnrUtils.konverterFraSyntetiskFnr(tilfeldigSyntetiskFodselsnummer)}\n")
 
 
     /* Generer tilfeldig fødselsnummer og fødselsdato: */

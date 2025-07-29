@@ -252,7 +252,7 @@ class FnrGenerator {
                 }
                 ?: 0
 
-        private fun getKontrollsiffer(fnr: String, tallrekke: List<Int>): Int? =
+        fun getKontrollsiffer(fnr: String, tallrekke: List<Int>): Int? =
             fnr.mapIndexed { i, char -> char.digitToInt() * tallrekke[i] }
                 .sum()
                 .let { sum ->
