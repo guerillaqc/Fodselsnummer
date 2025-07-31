@@ -74,16 +74,6 @@ class FnrUtils {
                         }
                 }
 
-        /*fun konverterFraSyntetisk(fnr: String): String? =
-            fnr.takeIf { it.length == 11 }
-                ?.let { validFnr ->
-                    validFnr.substring(2, 4).toIntOrNull()
-                        ?.takeIf { it in 80..91 }
-                        ?.let { syntetiskManed ->
-                            val vanligManed = (syntetiskManed - 79).toString().padStart(2, '0')
-                            "${validFnr.take(2)}$vanligManed${validFnr.drop(4)}"
-                        }
-                }*/
         fun konverterFraSyntetiskFnr(fnr: String): String? =
             fnr.takeIf { it.length == 11 }
                 ?.let { validFnr ->
@@ -91,15 +81,27 @@ class FnrUtils {
                         ?.takeIf { it in 80..91 }
                         ?.let { syntetiskManed ->
                             val vanligManed = (syntetiskManed - 79).toString().padStart(2, '0')
-                            val baseNumber = "${validFnr.take(2)}$vanligManed${validFnr.substring(4, 9)}"
+                            val baseDato = "${validFnr.take(2)}$vanligManed${validFnr.substring(4, 6)}"
+                            val opprinneligKjonn = validFnr.substring(8, 9).toInt() % 2
 
                             val tallrekkeT = listOf(3, 7, 6, 1, 8, 9, 4, 5, 2)
                             val tallrekkeF = listOf(5, 4, 3, 2, 7, 6, 5, 4, 3, 2)
 
-                            val T = getKontrollsiffer(baseNumber, tallrekkeT) ?: return null
-                            val F = getKontrollsiffer("$baseNumber$T", tallrekkeF) ?: return null
+                            for (individnummer in 0..999) {
+                                if (individnummer % 2 != opprinneligKjonn) continue
 
-                            "$baseNumber$T$F"
+                                val individStr = individnummer.toString().padStart(3, '0')
+                                val baseNumber = "$baseDato$individStr"
+
+                                val T = FnrGenerator.getKontrollsiffer(baseNumber, tallrekkeT)
+                                if (T != null) {
+                                    val F = FnrGenerator.getKontrollsiffer("$baseNumber$T", tallrekkeF) // Riktig tallrekke!
+                                    if (F != null) {
+                                        return "$baseNumber$T$F"
+                                    }
+                                }
+                            }
+                            null
                         }
                 }
 
