@@ -52,9 +52,6 @@ class FnrGenerator {
         fun tilfeldigSyntetiskFodselsnummerAlderMellom(alderFra: Int, alderTil: Int): String {
             return getRandomFnr(syntetisk = true, alder = Random.nextInt(alderFra, alderTil + 1))
         }
-        fun tilfeldigSyntetiskFodselsdato(): String = getRandomFdato(syntetisk = true)
-        fun tilfeldigSyntetiskFodselsdatoAlder(alder: Int): String = getRandomFdato(syntetisk = true, alder = alder)
-
 
         private fun getRandomFnr(alder: Int? = null,
                                  kjonn: Enums.Kjonn = HelperUtils.getRandomEnum(Enums.Kjonn::class.java),
@@ -92,10 +89,10 @@ class FnrGenerator {
                                    barn: Boolean = false,
                                    voksen: Boolean = false,
                                    barnehage: Boolean = false,
-                                   sfo: Boolean = false,
-                                   syntetisk: Boolean = false): String =
+                                   sfo: Boolean = false/*,
+                                   syntetisk: Boolean = false*/): String =
             getRandomFnr(alder = alder, kjonn = kjonn, forelderTil = forelderTil,
-                millenial = millenial, barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo, syntetisk = syntetisk)
+                millenial = millenial, barn = barn, voksen = voksen, barnehage = barnehage, sfo = sfo/*, syntetisk = syntetisk*/)
                 .let { FnrUtils.fodselsdatoFraFodselsnummer(it) }
 
         private fun erSkuddar(ar: Int): Boolean =

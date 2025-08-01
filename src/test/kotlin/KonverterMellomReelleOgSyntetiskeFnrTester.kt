@@ -18,14 +18,7 @@ class KonverterMellomReelleOgSyntetiskeFnrTester : StringSpec({
     }
 
     "Konverter syntetisk fnr til reellt fnr." {
-        val tilfeldigSyntetiskFnr = FnrGenerator.tilfeldigSyntetiskFodselsnummer()
-        println(tilfeldigSyntetiskFnr)
-        val konvertertTilReelltFnr = FnrUtils.konverterFraSyntetiskFnr(tilfeldigSyntetiskFnr.toString())
-        println(konvertertTilReelltFnr)
-        print("")
-        erGyldig(konvertertTilReelltFnr.toString()) shouldBe true
-
-        //erGyldig(FnrUtils.konverterFraSyntetiskFnr(FnrGenerator.tilfeldigSyntetiskFodselsnummer()).toString()) shouldBe true
+        erGyldig(FnrUtils.konverterFraSyntetiskFnr(FnrGenerator.tilfeldigSyntetiskFodselsnummer()).toString()) shouldBe true
     }
 
 })

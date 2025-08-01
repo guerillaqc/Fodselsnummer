@@ -22,6 +22,26 @@ object FnrValidator {
         return maned in 80..99
     }
 
+    fun erGyldigFodselsdato(fdato: String): Boolean {
+        if (fdato.length != 8) return false
+
+        val dag = fdato.substring(0, 2).toIntOrNull() ?: return false
+        val maned = fdato.substring(2, 4).toIntOrNull() ?: return false
+        val ar = fdato.substring(4, 8).toIntOrNull() ?: return false
+
+        if (maned !in 1..12) return false
+
+        return when (maned) {
+            1, 3, 5, 7, 8, 10, 12 -> dag in 1..31
+            4, 6, 9, 11 -> dag in 1..30
+            2 -> {
+                val erSkuddar = (ar % 4 == 0 && ar % 100 != 0) || (ar % 400 == 0)
+                if (erSkuddar) dag in 1..29 else dag in 1..28
+            }
+            else -> false
+        }
+    }
+
     private fun gyldigDato(numre: List<Int>): Boolean {
         val dag = numre[0] * 10 + numre[1]
         val mnd = numre[2] * 10 + numre[3]
@@ -36,8 +56,8 @@ object FnrValidator {
             else -> return false
         }
 
-        val fagktiskDag = if (dag in 41..71) dag - 40 else dag      // D-nummer
-        val faktiskMnd = if (mnd in 41..52) mnd - 40 else mnd       // H-nummer ikke støttet ennå
+        val fagktiskDag = if (dag in 41..71) dag - 40 else dag
+        val faktiskMnd = if (mnd in 41..52) mnd - 40 else mnd
 
         return try {
             LocalDate.of(fulltAr, faktiskMnd, fagktiskDag)

@@ -17,7 +17,7 @@ Et Kotlin/Java-bibliotek for generering, validering og manipulering av norske f√
 <dependency>
     <groupId>io.github.guerillaqc</groupId>
     <artifactId>fnr-utils</artifactId>
-    <version>1.0.0</version>
+    <version>1.5.7</version>
 </dependency>
 ```
 

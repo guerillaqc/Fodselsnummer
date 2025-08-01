@@ -25,6 +25,12 @@ class FnrUtils {
         fun alderFraFodselsnummer(fnr: String): Int =
             alderFraFodselsdato(fodselsdatoFraFodselsnummer(fnr.requireValidFnr()))
 
+        fun alderFraSyntetiskFodselsnummer(syntetiskFnr: String): Int {
+            val reelltFnr = konverterFraSyntetiskFnr(syntetiskFnr)
+                ?: throw IllegalArgumentException("Ugyldig syntetisk fødselsnummer")
+            return alderFraFodselsnummer(reelltFnr)
+        }
+
         fun alderFraFodselsdato(fdatoEllerDag: Any, mnd: Int? = null, ar: Int? = null): Int = when {
             fdatoEllerDag is String && mnd == null && ar == null ->
                 fdatoEllerDag.requireValidFdatoString()
