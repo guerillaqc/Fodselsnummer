@@ -57,7 +57,11 @@ object FnrValidator {
         }
 
         val fagktiskDag = if (dag in 41..71) dag - 40 else dag
-        val faktiskMnd = if (mnd in 41..52) mnd - 40 else mnd
+        val faktiskMnd = when {
+            mnd in 41..52 -> mnd - 40  // D-numre
+            mnd in 80..91 -> mnd - 79  // Syntetiske numre
+            else -> mnd
+        }
 
         return try {
             LocalDate.of(fulltAr, faktiskMnd, fagktiskDag)
